@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IlviraAPI.Models
@@ -14,5 +15,6 @@ namespace IlviraAPI.Models
         [Column(TypeName = "nvarchar(15)")]
         public string PaymentMethod { get; set; }
         public decimal GTotal { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

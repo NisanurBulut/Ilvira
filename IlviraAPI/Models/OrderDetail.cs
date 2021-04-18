@@ -11,7 +11,6 @@ namespace IlviraAPI.Models
         [Key]
         public long OrderDetailId { get; set; }
         public long OrderMasterId { get; set; }
-        public OrderMaster OrderMaster { get; set; }
         public int DessertItemId { get; set; }
         public DessertItem DessertItem { get; set; }
         public decimal DessetItemPrice { get; set; }
