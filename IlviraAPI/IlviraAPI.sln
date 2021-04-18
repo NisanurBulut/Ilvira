@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IlviraAPI", "IlviraAPI.csproj", "{4A574384-E173-4374-A406-1E9FEF50A48D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A574384-E173-4374-A406-1E9FEF50A48D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A574384-E173-4374-A406-1E9FEF50A48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A574384-E173-4374-A406-1E9FEF50A48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A574384-E173-4374-A406-1E9FEF50A48D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C3E50F8-376C-45D1-A9B4-C803D78799AA}
+	EndGlobalSection
+EndGlobal
