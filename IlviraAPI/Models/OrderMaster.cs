@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IlviraAPI.Models
 {
+    [Table("tOrderMaster")]
     public class OrderMaster
     {
         [Key]
@@ -14,6 +15,7 @@ namespace IlviraAPI.Models
         public Customer Customer { get; set; }
         [Column(TypeName = "nvarchar(15)")]
         public string PaymentMethod { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal GTotal { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
     }

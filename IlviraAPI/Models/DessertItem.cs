@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace IlviraAPI.Models
 {
+    [Table("tDessert")]
     public class DessertItem
     {
         [Key]
