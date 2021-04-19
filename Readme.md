@@ -1,7 +1,7 @@
 ## Give a Star! :star:
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
-### ILVIRA
+### ILVIRA: It is a dessert ordering application.
 <img src="https://github.com/NisanurBulut/Ilvira/blob/master/Trailers/ilvira.jpg">
 
 ## Project Structure (src)
