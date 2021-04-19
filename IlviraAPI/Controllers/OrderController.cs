@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IlviraAPI.Models;
 
 namespace IlviraAPI.Controllers
 {
-    public class OrderController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderController : ControllerBase
     {
         private readonly IlviraDbContext _context;
 
@@ -18,137 +20,83 @@ namespace IlviraAPI.Controllers
             _context = context;
         }
 
-        // GET: Order
-        public async Task<IActionResult> Index()
+        // GET: api/Order
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderMaster>>> GettOrderMaster()
         {
-            var ilviraDbContext = _context.tOrderMaster.Include(o => o.Customer);
-            return View(await ilviraDbContext.ToListAsync());
+            return await _context.tOrderMaster.ToListAsync();
         }
 
-        // GET: Order/Details/5
-        public async Task<IActionResult> Details(long? id)
+        // GET: api/Order/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OrderMaster>> GetOrderMaster(long id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var orderMaster = await _context.tOrderMaster
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.OrderMasterId == id);
-            if (orderMaster == null)
-            {
-                return NotFound();
-            }
-
-            return View(orderMaster);
-        }
-
-        // GET: Order/Create
-        public IActionResult Create()
-        {
-            ViewData["CustomerId"] = new SelectList(_context.tCustomer, "CustomerId", "CustomerId");
-            return View();
-        }
-
-        // POST: Order/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderMasterId,OrderNumber,CustomerId,PaymentMethod,GTotal")] OrderMaster orderMaster)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(orderMaster);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CustomerId"] = new SelectList(_context.tCustomer, "CustomerId", "CustomerId", orderMaster.CustomerId);
-            return View(orderMaster);
-        }
-
-        // GET: Order/Edit/5
-        public async Task<IActionResult> Edit(long? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var orderMaster = await _context.tOrderMaster.FindAsync(id);
+
             if (orderMaster == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.tCustomer, "CustomerId", "CustomerId", orderMaster.CustomerId);
-            return View(orderMaster);
+
+            return orderMaster;
         }
 
-        // POST: Order/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("OrderMasterId,OrderNumber,CustomerId,PaymentMethod,GTotal")] OrderMaster orderMaster)
+        // PUT: api/Order/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrderMaster(long id, OrderMaster orderMaster)
         {
             if (id != orderMaster.OrderMasterId)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            _context.Entry(orderMaster).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(orderMaster);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderMasterExists(orderMaster.OrderMasterId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            ViewData["CustomerId"] = new SelectList(_context.tCustomer, "CustomerId", "CustomerId", orderMaster.CustomerId);
-            return View(orderMaster);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderMasterExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: Order/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        // POST: api/Order
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<OrderMaster>> PostOrderMaster(OrderMaster orderMaster)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            _context.tOrderMaster.Add(orderMaster);
+            await _context.SaveChangesAsync();
 
-            var orderMaster = await _context.tOrderMaster
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.OrderMasterId == id);
+            return CreatedAtAction("GetOrderMaster", new { id = orderMaster.OrderMasterId }, orderMaster);
+        }
+
+        // DELETE: api/Order/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrderMaster(long id)
+        {
+            var orderMaster = await _context.tOrderMaster.FindAsync(id);
             if (orderMaster == null)
             {
                 return NotFound();
             }
 
-            return View(orderMaster);
-        }
-
-        // POST: Order/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
-        {
-            var orderMaster = await _context.tOrderMaster.FindAsync(id);
             _context.tOrderMaster.Remove(orderMaster);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return NoContent();
         }
 
         private bool OrderMasterExists(long id)
