@@ -3,6 +3,12 @@ import React from 'react';
 import Form from '../../layouts/Form';
 import Input from '../../controls/Input';
 import Select from '../../controls/Select';
+
+const pMethods = [
+  { id: 'none', title: 'Select' },
+  { id: 'cash', title: 'Select' },
+  { id: 'card', title: 'Select' },
+];
 export default function OrderForm() {
   return (
     <Form>
@@ -20,6 +26,11 @@ export default function OrderForm() {
           ></Select>
         </Grid>
         <Grid item xs={6}>
+          <Select
+            label="Payment Method"
+            name="pMethod"
+            options={pMethods}
+          ></Select>
           <Input disabled label="Grand Total" name="gTotal" />
         </Grid>
       </Grid>
