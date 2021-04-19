@@ -22,3 +22,7 @@ If you like or are using this project to learn or start your solution, please gi
 +---* utils (index)
 |
 +---* controls(Input, Buttın, Selectbox)
+
+## Installation
+- npm install @material-ui/core
+- npm install @material-ui/icons
