@@ -28,6 +28,11 @@ export default function OrderForm() {
       [name]: value,
     });
   };
+
+  const resetFormControls = () =>{
+    setValues();
+  }
+
   return (
     <>
       <Form>
