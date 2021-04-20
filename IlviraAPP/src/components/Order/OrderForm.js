@@ -1,5 +1,5 @@
-import { Grid } from '@material-ui/core';
 import React from 'react';
+import { Grid, InputAdornment } from '@material-ui/core';
 import Form from '../../layouts/Form';
 import { Input, Select, Button } from '../../controls';
 
@@ -22,6 +22,7 @@ export default function OrderForm(props) {
               label="Order Number"
               name="orderNumber"
               value={values.orderNumber}
+              InputProps={{ startAdornment:<InputAdornment position="start">#</InputAdornment> }}
             />
             <Select
               label="Customer"
@@ -48,6 +49,7 @@ export default function OrderForm(props) {
               label="Grand Total"
               name="gTotal"
               value={values.gTotal}
+              InputProps={{ startAdornment:<InputAdornment position="start">₺</InputAdornment> }}
             />
 
             <Button size="large">Orders</Button>
