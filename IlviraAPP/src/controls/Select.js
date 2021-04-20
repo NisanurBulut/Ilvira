@@ -18,7 +18,7 @@ export default function Select(props) {
   } = props;
   return (
     <FormControl
-      variant={variant || 'outlined'}
+    variant={variant || "outlined"}
       {...(error && { error: true })}
     >
       <InputLabel>{label}</InputLabel>
