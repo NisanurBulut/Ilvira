@@ -36,8 +36,8 @@ export default function OrderForm() {
   return (
     <>
       <Form>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid container >
+          <Grid item xs={6} >
             <Input
               disabled
               label="Order Number"
