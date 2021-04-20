@@ -21,49 +21,55 @@ const getFreshModelObject = () => ({
 });
 export default function OrderForm() {
   const [values, setValues] = useState(getFreshModelObject());
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
   return (
     <>
-    <Form>
+      <Form>
         <Grid container>
-            <Grid item xs={6}>
-                <Input
-                    disabled
-                    label="Order Number"
-                    name="orderNumber"
-                    value={values.orderNumber}
+          <Grid item xs={6}>
+            <Input
+              disabled
+              label="Order Number"
+              name="orderNumber"
+              value={values.orderNumber}
+            />
+            <Select
+              label="Customer"
+              name="customerId"
+              value={values.customerId}
+              onChange={handleInputChange}
+              options={[
+                { id: 1, title: 'Customer 1' },
+                { id: 2, title: 'Customer 2' },
+                { id: 3, title: 'Customer 3' },
+              ]}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Select
+              label="Payment Method"
+              name="pMethod"
+              value={values.pMethod}
+              options={pMethods}
+              onChange={handleInputChange}
+            />
+            <Input
+              disabled
+              label="Grand Total"
+              name="gTotal"
+              value={values.gTotal}
+            />
 
-                />
-                <Select
-                    label="Customer"
-                    name="customerId"
-                    value={values.customerId}
-                    options={[
-                      { id: 1, title: 'Customer 1' },
-                      { id: 2, title: 'Customer 2' },
-                      { id: 3, title: 'Customer 3' },
-                    ]}
-                />
-            </Grid>
-            <Grid item xs={6}>
-                <Select
-                    label="Payment Method"
-                    name="pMethod"
-                    value={values.pMethod}
-                    options={pMethods}
-                />
-                <Input
-                    disabled
-                    label="Grand Total"
-                    name="gTotal"
-                    value={values.gTotal}
-                />
-
-                <Button
-                    size="large"
-                >Orders</Button>
-            </Grid>
+            <Button size="large">Orders</Button>
+          </Grid>
         </Grid>
-    </Form>
-</>
+      </Form>
+    </>
   );
 }
