@@ -1,29 +1,49 @@
-import React from 'react';
-import { Grid, InputAdornment, makeStyles } from '@material-ui/core';
-import Form from '../../layouts/Form';
-import { Input, Select, Button } from '../../controls';
-
+import React from "react";
+import {
+  ButtonGroup,
+  Grid,
+  InputAdornment,
+  makeStyles,
+  Button as MuiButton,
+} from "@material-ui/core";
+import Form from "../../layouts/Form";
+import { Input, Select, Button } from "../../controls";
+import ReplayIcon from "@material-ui/icons/Replay";
+import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
+import ReorderIcon from "@material-ui/icons/Reorder";
 
 const pMethods = [
-  { id: 'none', title: 'Select' },
-  { id: 'cash', title: 'Select' },
-  { id: 'card', title: 'Select' },
+  { id: "none", title: "Select" },
+  { id: "cash", title: "Select" },
+  { id: "card", title: "Select" },
 ];
 
-const useStyles = makeStyles(theme=>({
+const useStyles = makeStyles((theme) => ({
   adornmentText: {
-    '& .MuiTypography-root': {
-      color:'#DD3AA0',
-      fontWeight: 'bolder',
-      fontSize:'1.5rem'
+    "& .MuiTypography-root": {
+      color: "#DD3AA0",
+      fontWeight: "bolder",
+      fontSize: "1.5rem",
+    },
+  },
+  submitButtonGroup: {
+    backgroundColor:'#DD3AA0',
+    color:'#fff',
+    margin: theme.spacing(1),
+    '& .MuiButton-label': {
+      textTransform: 'none',
+      color:'#fff',
+    },
+    '& .hover':{
+      backgroundColor:'#c68fb1'
     }
   }
-}))
+}));
 
 export default function OrderForm(props) {
-  const {values, errors, handleInputChange} = props;
+  const { values, errors, handleInputChange } = props;
   const classes = useStyles();
-  
+
   return (
     <>
       <Form>
@@ -34,7 +54,16 @@ export default function OrderForm(props) {
               label="Order Number"
               name="orderNumber"
               value={values.orderNumber}
-              InputProps={{ startAdornment:<InputAdornment className={classes.adornmentText} position="start">#</InputAdornment> }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment
+                    className={classes.adornmentText}
+                    position="start"
+                  >
+                    #
+                  </InputAdornment>
+                ),
+              }}
             />
             <Select
               label="Customer"
@@ -42,9 +71,9 @@ export default function OrderForm(props) {
               value={values.customerId}
               onChange={handleInputChange}
               options={[
-                { id: 1, title: 'Customer 1' },
-                { id: 2, title: 'Customer 2' },
-                { id: 3, title: 'Customer 3' },
+                { id: 1, title: "Customer 1" },
+                { id: 2, title: "Customer 2" },
+                { id: 3, title: "Customer 3" },
               ]}
             />
           </Grid>
@@ -61,10 +90,31 @@ export default function OrderForm(props) {
               label="Grand Total"
               name="gTotal"
               value={values.gTotal}
-              InputProps={{ startAdornment:<InputAdornment className={classes.adornmentText} position="start">₺</InputAdornment> }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment
+                    className={classes.adornmentText}
+                    position="start"
+                  >
+                    ₺
+                  </InputAdornment>
+                ),
+              }}
             />
 
-            <Button size="large">Orders</Button>
+            <ButtonGroup className={classes.submitButtonGroup}>
+              <MuiButton
+                size="large"
+                type="submit"
+                endIcon={<RestaurantMenuIcon />}
+              >
+                Submit
+              </MuiButton>
+              <MuiButton size="small" startIcon={<ReplayIcon />}>
+                Submit
+              </MuiButton>
+            </ButtonGroup>
+            <Button size="large" startIcon={<ReorderIcon />}>Orders</Button>
           </Grid>
         </Grid>
       </Form>
