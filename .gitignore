@@ -5,5 +5,4 @@
 */node_modules/*/
 */vscode/*/
 IlviraAPP/.vscode/*
-IlviraAPI/obj/*/
-*.obj
+IlviraAPI/obj/*

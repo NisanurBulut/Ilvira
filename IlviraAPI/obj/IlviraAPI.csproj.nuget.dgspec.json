@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj": {}
+    "D:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj": {}
   },
   "projects": {
-    "E:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj": {
+    "D:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj",
+        "projectUniqueName": "D:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj",
         "projectName": "IlviraAPI",
-        "projectPath": "E:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj",
+        "projectPath": "D:\\Projelerim\\Ilvira\\IlviraAPI\\IlviraAPI.csproj",
         "packagesPath": "C:\\Users\\nisanur.bulut\\.nuget\\packages\\",
-        "outputPath": "E:\\Projelerim\\Ilvira\\IlviraAPI\\obj\\",
+        "outputPath": "D:\\Projelerim\\Ilvira\\IlviraAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\nisanur.bulut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -106,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
