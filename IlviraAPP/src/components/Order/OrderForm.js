@@ -27,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submitButtonGroup: {
-    backgroundColor:'#DD3AA0',
-    color:'#fff',
+    backgroundColor: "#DD3AA0",
+    color: "#fff",
     margin: theme.spacing(1),
-    '& .MuiButton-label': {
-      textTransform: 'none',
-      color:'#fff',
+    "& .MuiButton-label": {
+      textTransform: "none",
+      color: "#fff",
     },
-    '& .hover':{
-      backgroundColor:'#c68fb1'
-    }
-  }
+    "& .hover": {
+      backgroundColor: "#c68fb1",
+    },
+  },
 }));
 
 export default function OrderForm(props) {
@@ -110,11 +110,11 @@ export default function OrderForm(props) {
               >
                 Submit
               </MuiButton>
-              <MuiButton size="small" startIcon={<ReplayIcon />}>
-                Submit
+              <MuiButton size="small" startIcon={<ReplayIcon />}></MuiButton>
+              <MuiButton size="small" startIcon={<ReorderIcon />}>
+                Orders
               </MuiButton>
             </ButtonGroup>
-            <Button size="large" startIcon={<ReorderIcon />}>Orders</Button>
           </Grid>
         </Grid>
       </Form>
