@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const BASE_URL = "https://localhost:44314/api/";
-
+export const ENDPOINTS = {
+    CUSTOMER:'Customer',
+    FOODITEM:'FoodItem',
+    ORDER:'Order'
+}
 export const createAPIEndpoint = (endpoint) => {
   let url = BASE_URL + endpoint + "/";
   return {

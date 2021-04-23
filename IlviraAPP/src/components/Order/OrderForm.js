@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ButtonGroup,
   Grid,
@@ -7,10 +7,11 @@ import {
   Button as MuiButton,
 } from "@material-ui/core";
 import Form from "../../layouts/Form";
-import { Input, Select, Button } from "../../controls";
 import ReplayIcon from "@material-ui/icons/Replay";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import ReorderIcon from "@material-ui/icons/Reorder";
+import { Input, Select, Button } from "../../controls";
+import { createAPIEndpoint, ENDPOINTS } from "../../api";
 
 const pMethods = [
   { id: "none", title: "Select" },
@@ -43,7 +44,15 @@ const useStyles = makeStyles((theme) => ({
 export default function OrderForm(props) {
   const { values, errors, handleInputChange } = props;
   const classes = useStyles();
-
+  useEffect(() => {
+    createAPIEndpoint(ENDPOINTS.CUSTOMER)
+      .fetchAll()
+      .then((res) => {
+        let customerData = res.data;
+        console.log(customerData);
+      })
+      .catch((err) => console.log(err));
+  });
   return (
     <>
       <Form>
