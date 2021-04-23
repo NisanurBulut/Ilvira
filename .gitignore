@@ -1,4 +1,9 @@
 
 /*/.vs/*/
+*/obj/*/
+*/bin/*/
+*/node_modules/*/
+*/vscode/*/
+IlviraAPP/.vscode/*
 IlviraAPI/obj/*/
-IlviraAPI/bin/*/
+*.obj
