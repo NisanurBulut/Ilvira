@@ -17,6 +17,7 @@ const getFreshModelObject = () => ({
   orderDetails: [],
 });
 export default function Order() {
+
   const {
     values,
     setValues,
@@ -25,6 +26,22 @@ export default function Order() {
     handleInputChange,
     resetFormControls,
   } = useForm(getFreshModelObject);
+
+  const addDessertItem = dessertItem => {
+    let dItem = {
+      orderMasterId: values.orderMasterId,
+      orderDetailId: 0,
+      dessertItemId: dessertItem.dessertItemId,
+      quantity:1,
+      dessertItemPrice: dessertItem.dessertItemPrice,
+      dessertItemName: dessertItem.dessertItemName
+    }
+    setValues({
+      ...values,
+      orderDetails: [...values.orderDetails, dItem]
+    })
+  }
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -33,10 +50,12 @@ export default function Order() {
         />
       </Grid>
       <Grid item xs={6}>
-        <SearchDessertItems></SearchDessertItems>
+        <SearchDessertItems {...{ addDessertItem }} />
       </Grid>
       <Grid item xs={6}>
-        <OrderedDessertItems></OrderedDessertItems>
+        <OrderedDessertItems
+          {...{ orderedDessertItems: values.orderDetails }}
+        />
       </Grid>
     </Grid>
   );

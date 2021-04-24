@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchDessertItems() {
+export default function SearchDessertItems(props) {
+  const { addDessertItem } = props;
   const [dessertItems, setDessertItems] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
@@ -105,10 +106,10 @@ export default function SearchDessertItems() {
             <ListItemText
               className={classes.listItemText}
               primary={item.dessertName}
-              secondary={item.price + "₺"}
+              secondary={item.price + " ₺"}
             />
             <ListItemSecondaryAction>
-              <IconButton>
+              <IconButton onClick={(e) => addDessertItem(item)}>
                 <PlusOneIcon />
                 <ArrowForwardIos />
               </IconButton>
