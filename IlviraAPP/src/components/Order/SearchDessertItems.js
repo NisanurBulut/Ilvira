@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchDessertItems(props) {
-  const { addDessertItem } = props;
+  const { addDessertItem, orderedDessertItems } = props;
   const [dessertItems, setDessertItems] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
@@ -69,16 +69,20 @@ export default function SearchDessertItems(props) {
       })
       .catch((err) => console.log(err));
   }, []);
-  
+
   useEffect(() => {
     let dList = [...dessertItems];
     dList = dList.filter((item) => {
-      return item.dessertName
-        .toLocaleLowerCase()
-        .includes(searchKey.toLocaleLowerCase());
+      return (
+        item.dessertName
+          .toLocaleLowerCase()
+          .includes(searchKey.toLocaleLowerCase()) &&
+        orderedDessertItems.every((oitem) => oitem.dessertItemId !== item.dessertItemId
+        )
+      );
     });
     setSearchList(dList);
-  }, [searchKey]);
+  }, [searchKey, orderedDessertItems]);
 
   return (
     <>

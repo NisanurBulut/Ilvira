@@ -53,7 +53,7 @@ export default function Order() {
         />
       </Grid>
       <Grid item xs={6}>
-        <SearchDessertItems {...{ addDessertItem }} />
+        <SearchDessertItems {...{ addDessertItem,  orderedDessertItems: values.orderDetails, removeDessertItem  }} />
       </Grid>
       <Grid item xs={6}>
         <OrderedDessertItems
