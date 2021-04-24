@@ -26,25 +26,8 @@ export default function Order() {
     resetFormControls,
   } = useForm(getFreshModelObject);
 
-  const addDessertItem = (dessertItem) => {
-    let dItem = {
-      orderMasterId: values.orderMasterId,
-      orderDetailId: 0,
-      dessertItemId: dessertItem.dessertItemId,
-      quantity: 1,
-      dessertItemPrice: dessertItem.price,
-      dessertItemName: dessertItem.dessertName,
-    };
-    setValues({
-      ...values,
-      orderDetails: [...values.orderDetails, dItem],
-    });
-  };
-  const removeDessertItem = (index, id) => {
-    let dItem = { ...values };
-    dItem.orderDetails = dItem.orderDetails.filter((_, i) => i !== index);
-    setValues({ ...dItem });
-};
+
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -53,11 +36,11 @@ export default function Order() {
         />
       </Grid>
       <Grid item xs={6}>
-        <SearchDessertItems {...{ addDessertItem,  orderedDessertItems: values.orderDetails, removeDessertItem  }} />
+        <SearchDessertItems {...{ values, setValues  }} />
       </Grid>
       <Grid item xs={6}>
         <OrderedDessertItems
-          {...{removeDessertItem, values, setValues }}
+          {...{values, setValues }}
         />
       </Grid>
     </Grid>

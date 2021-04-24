@@ -55,11 +55,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchDessertItems(props) {
-  const { addDessertItem, orderedDessertItems } = props;
+  const { values, setValues } = props;
   const [dessertItems, setDessertItems] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const classes = useStyles();
+
+  let orderedDessertItems = values.orderDetails;
+
+  const addDessertItem = (dessertItem) => {
+    let dItem = {
+      orderMasterId: values.orderMasterId,
+      orderDetailId: 0,
+      dessertItemId: dessertItem.dessertItemId,
+      quantity: 1,
+      dessertItemPrice: dessertItem.price,
+      dessertItemName: dessertItem.dessertName,
+    };
+    setValues({
+      ...values,
+      orderDetails: [...values.orderDetails, dItem],
+    });
+  };
 
   useEffect(() => {
     createAPIEndpoint(ENDPOINTS.DESSERTITEM)
@@ -100,7 +117,7 @@ export default function SearchDessertItems(props) {
       </Paper>
       <List className={classes.listRoot}>
         {searchList.map((item, index) => (
-          <ListItem key={index}>
+          <ListItem key={index} onClick={e => addDessertItem(item)}>
             <ListItemAvatar>
               <Avatar
                 className={classes.largeAvatar}

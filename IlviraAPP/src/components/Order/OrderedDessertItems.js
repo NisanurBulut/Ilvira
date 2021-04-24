@@ -41,10 +41,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OrderedDessertItems(props) {
 
-  const { removeDessertItem, values, setValues } = props;
+  const { values, setValues } = props;
   const classes = useStyles();
 
   let orderedDessertItems = values.orderDetails;
+
+  const removeDessertItem = (index, id) => {
+    let dItem = { ...values };
+    dItem.orderDetails = dItem.orderDetails.filter((_, i) => i !== index);
+    setValues({ ...dItem });
+};
 
   const updateQuantity = (index, value) => {
     let dItemDetails = { ...values };
@@ -57,7 +63,7 @@ export default function OrderedDessertItems(props) {
 
   return (
     <List className={classes.listRoot}>
-      {orderedDessertItems.map((item, index) => (
+      { orderedDessertItems.map((item, index) => (
         <Paper key={index}>
           <ListItem>
             <ListItemText
@@ -80,6 +86,8 @@ export default function OrderedDessertItems(props) {
                       +
                     </Button>
                   </ButtonGroup>
+                 
+                  <span>{" "+item.quantity * item.dessertItemPrice+ " ₺ " }</span>
                 </>
               }
             />
