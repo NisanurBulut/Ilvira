@@ -7,6 +7,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   makeStyles,
+  ButtonGroup,Button
 } from "@material-ui/core";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 
@@ -55,6 +56,15 @@ export default function OrderedDessertItems(props) {
                   fontSize: "1.2em",
                 },
               }}
+              secondary={
+                <>
+                <ButtonGroup size="small">
+                  <Button>-</Button>
+                  <Button disabled>{item.quantity}</Button>
+                  <Button>+</Button>
+                </ButtonGroup>
+                </>
+              }
             />
             <ListItemSecondaryAction>
               <IconButton

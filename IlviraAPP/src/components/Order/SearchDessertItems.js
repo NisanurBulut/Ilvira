@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listItemText: {
     textAlign: "center",
+    fontFamily: "Segoe UI Symbol"
   },
   listRoot: {
     marginTop: theme.spacing(1),
