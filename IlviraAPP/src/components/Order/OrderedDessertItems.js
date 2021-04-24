@@ -11,7 +11,7 @@ import {
   Button,
 } from "@material-ui/core";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
-
+import { roundTo2DecimalPoint } from "../../utils";
 const useStyles = makeStyles((theme) => ({
   searchPaper: {
     padding: "2px 4px",
@@ -63,7 +63,7 @@ export default function OrderedDessertItems(props) {
 
   return (
     <List className={classes.listRoot}>
-      { orderedDessertItems.map((item, index) => (
+      {orderedDessertItems.map((item, index) => (
         <Paper key={index}>
           <ListItem>
             <ListItemText
@@ -86,10 +86,19 @@ export default function OrderedDessertItems(props) {
                       +
                     </Button>
                   </ButtonGroup>
-                 
-                  <span>{" "+item.quantity * item.dessertItemPrice+ " ₺ " }</span>
+
+                  <span>
+                    {" " +
+                      roundTo2DecimalPoint(
+                        item.quantity * item.dessertItemPrice
+                      ) +
+                      " ₺ "}
+                  </span>
                 </>
               }
+              secondaryTypographyProps={{
+                component:'div'
+              }}
             />
             <ListItemSecondaryAction>
               <IconButton
