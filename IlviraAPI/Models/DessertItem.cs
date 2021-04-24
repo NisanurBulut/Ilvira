@@ -16,5 +16,6 @@ namespace IlviraAPI.Models
         public string DessertName { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
