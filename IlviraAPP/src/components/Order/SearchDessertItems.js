@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   },
   listItemText: {
     textAlign: "center",
-    fontFamily: "Segoe UI Symbol"
   },
   listRoot: {
     marginTop: theme.spacing(1),
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     "& li:hover": {
       cursor: "pointer",
-      backgroundColor: "#E3E3E3",
+      backgroundColor: "#fbebf5",
     },
     "& li:hover .MuiButtonBase-root": {
       display: "block",

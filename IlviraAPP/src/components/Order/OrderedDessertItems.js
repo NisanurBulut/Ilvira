@@ -13,10 +13,35 @@ import {
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 import { roundTo2DecimalPoint } from "../../utils";
 const useStyles = makeStyles((theme) => ({
-  searchPaper: {
-    padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
+  PaperRoot: {
+    margin: "15px 0px",
+    "&:hover": {
+      cursor: "pointer",
+    },
+    "&:hover $deleteButton": {
+      display: "block",
+    },
+  },
+  buttonGroup: {
+    backgroundColor: "#e3e3e3",
+    borderRadius: 8,
+    "& .MuiButtonBase-root ": {
+      border: "none",
+      minWidth: "25px",
+      padding: "1px",
+    },
+    "& button:nth-child(2)": {
+      fontSize: "1.2em",
+      color: "#000",
+    },
+  },
+  deleteButton: {
+    display: "none",
+  },
+  totalPerItem: {
+    fontWeight: "bolder",
+    fontSize: "1.2em",
+    margin: "0px 20px",
   },
   listRoot: {
     marginTop: theme.spacing(1),
@@ -24,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     "& li:hover": {
       cursor: "pointer",
-      backgroundColor: "#E3E3E3",
+      backgroundColor: "#fbebf5",
     },
     "& li:hover .MuiButtonBase-root": {
       display: "block",
@@ -40,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderedDessertItems(props) {
-
   const { values, setValues } = props;
   const classes = useStyles();
 
@@ -50,7 +74,7 @@ export default function OrderedDessertItems(props) {
     let dItem = { ...values };
     dItem.orderDetails = dItem.orderDetails.filter((_, i) => i !== index);
     setValues({ ...dItem });
-};
+  };
 
   const updateQuantity = (index, value) => {
     let dItemDetails = { ...values };
@@ -64,7 +88,7 @@ export default function OrderedDessertItems(props) {
   return (
     <List className={classes.listRoot}>
       {orderedDessertItems.map((item, index) => (
-        <Paper key={index}>
+        <Paper key={index} className={classes.PaperRoot}>
           <ListItem>
             <ListItemText
               primary={item.dessertItemName}
@@ -77,7 +101,7 @@ export default function OrderedDessertItems(props) {
               }}
               secondary={
                 <>
-                  <ButtonGroup size="small">
+                  <ButtonGroup size="small" className={classes.buttonGroup}>
                     <Button onClick={(e) => updateQuantity(index, -1)}>
                       -
                     </Button>
@@ -87,20 +111,20 @@ export default function OrderedDessertItems(props) {
                     </Button>
                   </ButtonGroup>
 
-                  <span>
-                    {" " +
+                  <span className={classes.totalPerItem}>
+                    {
                       roundTo2DecimalPoint(
                         item.quantity * item.dessertItemPrice
                       ) +
-                      " ₺ "}
+                      " ₺"}
                   </span>
                 </>
               }
               secondaryTypographyProps={{
-                component:'div'
+                component: "div",
               }}
             />
-            <ListItemSecondaryAction>
+            <ListItemSecondaryAction className={classes.deleteButton}>
               <IconButton
                 disableRipple
                 onClick={(e) => removeDessertItem(index, item.orderDetailsId)}
