@@ -40,13 +40,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderedDessertItems(props) {
+
   const { removeDessertItem, values, setValues } = props;
   const classes = useStyles();
+
   let orderedDessertItems = values.orderDetails;
+
   const updateQuantity = (index, value) => {
-    let dItem = { ...values };
-    dItem.orderDetails[index].quantity += value;
-    setValues({ ...dItem });
+    let dItemDetails = { ...values };
+    let dItem = dItemDetails.orderDetails[index];
+    if (dItem.quantity + value > 0) {
+      dItem.quantity += value;
+      setValues({ ...dItemDetails });
+    }
   };
 
   return (
