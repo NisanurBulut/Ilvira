@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ButtonGroup,
   Grid,
@@ -44,15 +44,19 @@ const useStyles = makeStyles((theme) => ({
 export default function OrderForm(props) {
   const { values, errors, handleInputChange } = props;
   const classes = useStyles();
+  const [customerList, setCustomerList] = useState([]);
   useEffect(() => {
     createAPIEndpoint(ENDPOINTS.CUSTOMER)
       .fetchAll()
       .then((res) => {
-        let customerData = res.data;
-        console.log(customerData);
+        let customerData = res.data.map((item) => ({
+          id: item.customerId,
+          title: item.customerName,
+        }));
+        setCustomerList(customerData);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
   return (
     <>
       <Form>
@@ -79,11 +83,7 @@ export default function OrderForm(props) {
               name="customerId"
               value={values.customerId}
               onChange={handleInputChange}
-              options={[
-                { id: 1, title: "Customer 1" },
-                { id: 2, title: "Customer 2" },
-                { id: 3, title: "Customer 3" },
-              ]}
+              options={customerList}
             />
           </Grid>
           <Grid item xs={6}>
