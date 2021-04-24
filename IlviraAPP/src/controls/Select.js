@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   FormControl,
   InputLabel,
   Select as MuiSelect,
   MenuItem,
   FormHelperText,
-} from '@material-ui/core';
+} from "@material-ui/core";
 export default function Select(props) {
   const {
     name,
@@ -18,7 +18,7 @@ export default function Select(props) {
   } = props;
   return (
     <FormControl
-    variant={variant || "outlined"}
+      variant={variant || "outlined"}
       {...(error && { error: true })}
     >
       <InputLabel>{label}</InputLabel>
@@ -29,6 +29,7 @@ export default function Select(props) {
           </MenuItem>
         ))}
       </MuiSelect>
+      {error && <FormHelperText>{error}</FormHelperText>}
     </FormControl>
   );
 }
