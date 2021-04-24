@@ -14,8 +14,8 @@ import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
 const pMethods = [
-  { id: 1, title: "Cash" },
-  { id: 2, title: "Credit Card" },
+  { id: "Cash", title: "Cash" },
+  { id: "Card", title: "Card" },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -68,9 +68,9 @@ export default function OrderForm(props) {
   const validateForm = () => {
     let temp = {};
     temp.customerId = values.customerId !== 0 ? "" : "This field is required";
-    temp.pMethod = values.pMethod !== 0 ? "" : "This field is required";
+    temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
     temp.orderDetails =
-      values.orderDetails.label !== 0 ? "" : "This field is required";
+      values.orderDetails.length  !== 0 ? "" : "This field is required";
     setErrors({ ...temp });
     return Object.values(temp).every((a) => a === "");
   };
@@ -78,6 +78,12 @@ export default function OrderForm(props) {
   const submitOrder = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      createAPIEndpoint(ENDPOINTS.ORDER)
+        .create(values)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -118,7 +124,7 @@ export default function OrderForm(props) {
               value={values.pMethod}
               options={pMethods}
               onChange={handleInputChange}
-              error = {errors.pMethod}
+              error={errors.pMethod}
             />
             <Input
               disabled

@@ -95,7 +95,7 @@ export default function SearchDessertItems(props) {
         item.dessertName
           .toLocaleLowerCase()
           .includes(searchKey.toLocaleLowerCase()) &&
-        orderedDessertItems.every((oitem) => oitem.dessertItemId !== item.dessertItemId
+        orderedDessertItems.every((oiled) => oiled.dessertItemId !== item.dessertItemId
         )
       );
     });
