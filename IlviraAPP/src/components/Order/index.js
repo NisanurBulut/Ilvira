@@ -26,22 +26,24 @@ export default function Order() {
     resetFormControls,
   } = useForm(getFreshModelObject);
 
-
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <OrderForm
-          {...{ values, errors, handleInputChange, resetFormControls }}
+          {...{
+            values,
+            setValues,
+            errors,
+            handleInputChange,
+            resetFormControls,
+          }}
         />
       </Grid>
       <Grid item xs={6}>
-        <SearchDessertItems {...{ values, setValues  }} />
+        <SearchDessertItems {...{ values, setValues }} />
       </Grid>
       <Grid item xs={6}>
-        <OrderedDessertItems
-          {...{values, setValues }}
-        />
+        <OrderedDessertItems {...{ values, setValues }} />
       </Grid>
     </Grid>
   );
