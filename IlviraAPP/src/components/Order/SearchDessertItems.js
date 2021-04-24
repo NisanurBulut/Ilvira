@@ -5,11 +5,14 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
-  Avatar
+  Avatar,
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { ENDPOINTS, createAPIEndpoint } from "../../api";
 import SearchTwoTone from "@material-ui/icons/SearchTwoTone";
+import PlusOneIcon from '@material-ui/icons/PlusOne';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Paper, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(12),
     height: theme.spacing(8),
   },
+  listItemText:{
+    textAlign: "center"
+  }
 }));
 
 export default function SearchDessertItems() {
@@ -69,16 +75,24 @@ export default function SearchDessertItems() {
       <List>
         {searchList.map((item, index) => (
           <ListItem key={index}>
-            <ListItemText
-              primary={item.dessertName}
-              secondary={item.price + "₺"}
-            />
-        <ListItemAvatar>
+               <ListItemAvatar>
               <Avatar className={classes.largeAvatar} variant="square"
                 alt={item.dessertName}
                 src={item.imageUrl}
               />
             </ListItemAvatar>
+            <ListItemText
+            className={classes.listItemText}
+              primary={item.dessertName}
+              secondary={item.price + "₺"}
+            />
+            <ListItemSecondaryAction>
+                <IconButton>
+                    <PlusOneIcon />
+                    <ArrowForwardIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
+       
           </ListItem>
         ))}
       </List>
