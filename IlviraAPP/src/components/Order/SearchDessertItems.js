@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listItemText: {
     textAlign: "center",
+    fontStyle: "italic",
   },
   listRoot: {
     marginTop: theme.spacing(1),
