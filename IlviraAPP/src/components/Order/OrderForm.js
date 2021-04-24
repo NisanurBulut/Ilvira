@@ -10,13 +10,12 @@ import Form from "../../layouts/Form";
 import ReplayIcon from "@material-ui/icons/Replay";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import { Input, Select, Button } from "../../controls";
+import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
 const pMethods = [
-  { id: "none", title: "Select" },
-  { id: "cash", title: "Select" },
-  { id: "card", title: "Select" },
+  { id: 1, title: "Cash" },
+  { id: 2, title: "Credit Card" },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderForm(props) {
-  const { values, setValues, errors, handleInputChange } = props;
+  const { values, setValues, errors, setErrors, handleInputChange } = props;
   const classes = useStyles();
   const [customerList, setCustomerList] = useState([]);
 
@@ -66,9 +65,25 @@ export default function OrderForm(props) {
     setValues({ ...values, gTotal: roundTo2DecimalPoint(gTotal) });
   }, [JSON.stringify(values.orderDetails)]);
 
+  const validateForm = () => {
+    let temp = {};
+    temp.customerId = values.customerId !== 0 ? "" : "This field is required";
+    temp.pMethod = values.pMethod !== 0 ? "" : "This field is required";
+    temp.orderDetails =
+      values.orderDetails.label !== 0 ? "" : "This field is required";
+    setErrors({ ...temp });
+    return Object.values(temp).every((a) => a === "");
+  };
+
+  const submitOrder = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+    }
+  };
+
   return (
     <>
-      <Form>
+      <Form onSubmit={submitOrder}>
         <Grid container>
           <Grid item xs={6}>
             <Input
@@ -93,6 +108,7 @@ export default function OrderForm(props) {
               value={values.customerId}
               onChange={handleInputChange}
               options={customerList}
+              error={errors.customerId}
             />
           </Grid>
           <Grid item xs={6}>
@@ -102,6 +118,7 @@ export default function OrderForm(props) {
               value={values.pMethod}
               options={pMethods}
               onChange={handleInputChange}
+              error = {errors.pMethod}
             />
             <Input
               disabled

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonGroup: {
-    backgroundColor: "#e3e3e3",
+    backgroundColor: "#f8d7ec",
     borderRadius: 8,
     "& .MuiButtonBase-root ": {
       border: "none",
@@ -87,54 +87,66 @@ export default function OrderedDessertItems(props) {
 
   return (
     <List className={classes.listRoot}>
-      {orderedDessertItems.map((item, index) => (
-        <Paper key={index} className={classes.PaperRoot}>
-          <ListItem>
-            <ListItemText
-              primary={item.dessertItemName}
-              primaryTypographyProps={{
-                component: "h1",
-                style: {
-                  fontWeight: "500",
-                  fontSize: "1.2em",
-                },
-              }}
-              secondary={
-                <>
-                  <ButtonGroup size="small" className={classes.buttonGroup}>
-                    <Button onClick={(e) => updateQuantity(index, -1)}>
-                      -
-                    </Button>
-                    <Button disabled>{item.quantity}</Button>
-                    <Button onClick={(e) => updateQuantity(index, +1)}>
-                      +
-                    </Button>
-                  </ButtonGroup>
+      {orderedDessertItems.length === 0 ? (
+        <ListItem>
+          <ListItemText
+            primary="Please select dessert items"
+            primaryTypographyProps={{
+              style: {
+                textAlign: "center",
+                fontStyle: "italic",
+              },
+            }}
+          />
+        </ListItem>
+      ) : (
+        orderedDessertItems.map((item, index) => (
+          <Paper key={index} className={classes.PaperRoot}>
+            <ListItem>
+              <ListItemText
+                primary={item.dessertItemName}
+                primaryTypographyProps={{
+                  component: "h1",
+                  style: {
+                    fontWeight: "500",
+                    fontSize: "1.2em",
+                  },
+                }}
+                secondary={
+                  <>
+                    <ButtonGroup size="small" className={classes.buttonGroup}>
+                      <Button onClick={(e) => updateQuantity(index, -1)}>
+                        -
+                      </Button>
+                      <Button disabled>{item.quantity}</Button>
+                      <Button onClick={(e) => updateQuantity(index, +1)}>
+                        +
+                      </Button>
+                    </ButtonGroup>
 
-                  <span className={classes.totalPerItem}>
-                    {
-                      roundTo2DecimalPoint(
+                    <span className={classes.totalPerItem}>
+                      {roundTo2DecimalPoint(
                         item.quantity * item.dessertItemPrice
-                      ) +
-                      " ₺"}
-                  </span>
-                </>
-              }
-              secondaryTypographyProps={{
-                component: "div",
-              }}
-            />
-            <ListItemSecondaryAction className={classes.deleteButton}>
-              <IconButton
-                disableRipple
-                onClick={(e) => removeDessertItem(index, item.orderDetailsId)}
-              >
-                <DeleteTwoToneIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        </Paper>
-      ))}
+                      ) + " ₺"}
+                    </span>
+                  </>
+                }
+                secondaryTypographyProps={{
+                  component: "div",
+                }}
+              />
+              <ListItemSecondaryAction className={classes.deleteButton}>
+                <IconButton
+                  disableRipple
+                  onClick={(e) => removeDessertItem(index, item.orderDetailsId)}
+                >
+                  <DeleteTwoToneIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </Paper>
+        ))
+      )}
     </List>
   );
 }
