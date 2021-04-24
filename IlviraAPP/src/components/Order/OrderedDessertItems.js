@@ -1,6 +1,14 @@
 import React from "react";
-import { Paper, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, makeStyles } from "@material-ui/core";
-import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import {
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  makeStyles,
+} from "@material-ui/core";
+import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 
 const useStyles = makeStyles((theme) => ({
   searchPaper: {
@@ -30,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderedDessertItems(props) {
-  const { orderedDessertItems } = props;
+  const { orderedDessertItems, removeDessertItem } = props;
   const classes = useStyles();
 
   return (
     <List className={classes.listRoot}>
-      { orderedDessertItems.map((item, index) => (
+      {orderedDessertItems.map((item, index) => (
         <Paper key={index}>
           <ListItem>
             <ListItemText
@@ -49,7 +57,10 @@ export default function OrderedDessertItems(props) {
               }}
             />
             <ListItemSecondaryAction>
-              <IconButton>
+              <IconButton
+                disableRipple
+                onClick={(e) => removeDessertItem(index, item.orderDetailsId)}
+              >
                 <DeleteTwoToneIcon />
               </IconButton>
             </ListItemSecondaryAction>
