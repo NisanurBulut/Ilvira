@@ -33,9 +33,10 @@ export default function Order() {
       orderDetailId: 0,
       dessertItemId: dessertItem.dessertItemId,
       quantity:1,
-      dessertItemPrice: dessertItem.dessertItemPrice,
-      dessertItemName: dessertItem.dessertItemName
+      dessertItemPrice: dessertItem.price,
+      dessertItemName: dessertItem.dessertName
     }
+
     setValues({
       ...values,
       orderDetails: [...values.orderDetails, dItem]
@@ -43,7 +44,7 @@ export default function Order() {
   }
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <OrderForm
           {...{ values, errors, handleInputChange, resetFormControls }}

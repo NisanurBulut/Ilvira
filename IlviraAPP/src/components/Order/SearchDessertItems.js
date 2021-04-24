@@ -69,6 +69,7 @@ export default function SearchDessertItems(props) {
       })
       .catch((err) => console.log(err));
   }, []);
+  
   useEffect(() => {
     let dList = [...dessertItems];
     dList = dList.filter((item) => {
