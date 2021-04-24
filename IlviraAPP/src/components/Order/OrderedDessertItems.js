@@ -7,7 +7,8 @@ import {
   ListItemSecondaryAction,
   IconButton,
   makeStyles,
-  ButtonGroup,Button
+  ButtonGroup,
+  Button,
 } from "@material-ui/core";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 
@@ -39,8 +40,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderedDessertItems(props) {
-  const { orderedDessertItems, removeDessertItem } = props;
+  const { removeDessertItem, values, setValues } = props;
   const classes = useStyles();
+  let orderedDessertItems = values.orderDetails;
+  const updateQuantity = (index, value) => {
+    let dItem = { ...values };
+    dItem.orderDetails[index].quantity += value;
+    setValues({ ...dItem });
+  };
 
   return (
     <List className={classes.listRoot}>
@@ -58,11 +65,15 @@ export default function OrderedDessertItems(props) {
               }}
               secondary={
                 <>
-                <ButtonGroup size="small">
-                  <Button>-</Button>
-                  <Button disabled>{item.quantity}</Button>
-                  <Button>+</Button>
-                </ButtonGroup>
+                  <ButtonGroup size="small">
+                    <Button onClick={(e) => updateQuantity(index, -1)}>
+                      -
+                    </Button>
+                    <Button disabled>{item.quantity}</Button>
+                    <Button onClick={(e) => updateQuantity(index, +1)}>
+                      +
+                    </Button>
+                  </ButtonGroup>
                 </>
               }
             />

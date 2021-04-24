@@ -57,7 +57,7 @@ export default function Order() {
       </Grid>
       <Grid item xs={6}>
         <OrderedDessertItems
-          {...{ orderedDessertItems: values.orderDetails, removeDessertItem }}
+          {...{removeDessertItem, values, setValues }}
         />
       </Grid>
     </Grid>
