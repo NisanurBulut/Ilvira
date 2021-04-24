@@ -6,13 +6,13 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { ENDPOINTS, createAPIEndpoint } from "../../api";
 import SearchTwoTone from "@material-ui/icons/SearchTwoTone";
-import PlusOneIcon from '@material-ui/icons/PlusOne';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import PlusOneIcon from "@material-ui/icons/PlusOne";
+import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
 import { Paper, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,9 +29,28 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(12),
     height: theme.spacing(8),
   },
-  listItemText:{
-    textAlign: "center"
-  }
+  listItemText: {
+    textAlign: "center",
+  },
+  listRoot: {
+    marginTop: theme.spacing(1),
+    maxHeight: 450,
+    overflow: "auto",
+    "& li:hover": {
+      cursor: "pointer",
+      backgroundColor: "#E3E3E3",
+    },
+    "& li:hover .MuiButtonBase-root": {
+      display: "block",
+      color: "#D4389A",
+    },
+    "& .MuiButtonBase-root": {
+      display: "none",
+    },
+    "& .MuiButtonBase-root:hover": {
+      backgroundColor: "transparent",
+    },
+  },
 }));
 
 export default function SearchDessertItems() {
@@ -72,27 +91,28 @@ export default function SearchDessertItems() {
           <SearchTwoTone />
         </IconButton>
       </Paper>
-      <List>
+      <List className={classes.listRoot}>
         {searchList.map((item, index) => (
           <ListItem key={index}>
-               <ListItemAvatar>
-              <Avatar className={classes.largeAvatar} variant="square"
+            <ListItemAvatar>
+              <Avatar
+                className={classes.largeAvatar}
+                variant="square"
                 alt={item.dessertName}
                 src={item.imageUrl}
               />
             </ListItemAvatar>
             <ListItemText
-            className={classes.listItemText}
+              className={classes.listItemText}
               primary={item.dessertName}
               secondary={item.price + "₺"}
             />
             <ListItemSecondaryAction>
-                <IconButton>
-                    <PlusOneIcon />
-                    <ArrowForwardIcon />
-                </IconButton>
+              <IconButton>
+                <PlusOneIcon />
+                <ArrowForwardIos />
+              </IconButton>
             </ListItemSecondaryAction>
-       
           </ListItem>
         ))}
       </List>
