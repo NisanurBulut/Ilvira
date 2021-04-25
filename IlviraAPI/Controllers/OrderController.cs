@@ -46,7 +46,7 @@ namespace IlviraAPI.Controllers
                                           detail.DessertItemId,
                                           detail.DessertItemPrice,
                                           detail.Quantity,
-                                          dessertItemName=dessertItem.DessertName
+                                          dessertItemName = dessertItem.DessertName
                                       }).ToListAsync();
             var orderMaster = await (from o in _context.Set<OrderMaster>()
                                      where o.OrderMasterId == id
@@ -80,14 +80,18 @@ namespace IlviraAPI.Controllers
 
             _context.Entry(orderMaster).State = EntityState.Modified;
             // existing dessert items & newly added dessert items
-            foreach(OrderDetail item in orderMaster.OrderDetails)
+            foreach (OrderDetail item in orderMaster.OrderDetails)
             {
                 if (item.OrderDetailId == 0)
                     _context.tOrderDetail.Add(item);
                 else
                     _context.Entry(item).State = EntityState.Modified;
             }
-            foreach(var i in orderMaster.DeletedOrderItemIds)
+            foreach (var idx in orderMaster.DeletedOrderItemIds.Split(',').Where(x => x != String.Empty))
+            {
+                OrderDetail odetail = _context.tOrderDetail.Find(Convert.ToInt64(idx));
+                _context.tOrderDetail.Remove(odetail);
+            }
             try
             {
                 await _context.SaveChangesAsync();
