@@ -127,7 +127,10 @@ export default function OrderForm(props) {
       }
     }
   };
-
+  const resetForm = ()=>{
+    resetFormControls();
+    setOrderId(0);
+  }
   const openHistoryOfOrders = (e) => {
     setOrderHistoryVisibility(true);
   };
@@ -196,7 +199,7 @@ export default function OrderForm(props) {
               >
                 Submit
               </MuiButton>
-              <MuiButton size="small" startIcon={<ReplayIcon />}></MuiButton>
+              <MuiButton onClick={resetForm} size="small" startIcon={<ReplayIcon />}></MuiButton>
               <MuiButton
                 size="small"
                 onClick={openHistoryOfOrders}

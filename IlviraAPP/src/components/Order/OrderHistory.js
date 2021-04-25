@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import Table from "../../layouts/Table";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
-import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
 export default function OrderHistory(props) {
   const { setOrderId, setOrderHistoryVisibility } = props;
@@ -22,7 +22,7 @@ export default function OrderHistory(props) {
     setOrderId(id);
     setOrderHistoryVisibility(false);
   };
-
+  const deleteOrder = (id) => {};
   return (
     <Table>
       <TableHead>
@@ -36,14 +36,20 @@ export default function OrderHistory(props) {
       </TableHead>
       <TableBody>
         {orderHistory.map((item) => (
-          <TableRow key={item.orderMasterId} >
+          <TableRow key={item.orderMasterId}>
             <TableCell>{item.orderNumber}</TableCell>
             <TableCell>{item.customer.customerName}</TableCell>
             <TableCell>{item.pMethod}</TableCell>
             <TableCell>{item.gTotal + " ₺"}</TableCell>
             <TableCell>
-              <DeleteTwoToneIcon color="secondary" />
-              <EditTwoToneIcon color="primary" onClick={e=>showForUpdate(item.orderMasterId)} />
+              <DeleteTwoToneIcon
+                color="secondary"
+                onClick={(e) => deleteOrder(item.orderMasterId)}
+              />
+              <EditTwoToneIcon
+                color="primary"
+                onClick={(e) => showForUpdate(item.orderMasterId)}
+              />
             </TableCell>
           </TableRow>
         ))}
