@@ -10,7 +10,7 @@ import Form from "../../layouts/Form";
 import Popup from "../../layouts/Popup";
 import ReplayIcon from "@material-ui/icons/Replay";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
-import VisibilityTwoToneIcon from '@material-ui/icons/VisibilityTwoTone';
+import VisibilityTwoToneIcon from "@material-ui/icons/VisibilityTwoTone";
 import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
@@ -57,6 +57,7 @@ export default function OrderForm(props) {
   const classes = useStyles();
   const [customerList, setCustomerList] = useState([]);
   const [orderHistoryVisibility, setOrderHistoryVisibility] = useState(false);
+  const [orderId, setOrderId] = useState(0);
   useEffect(() => {
     createAPIEndpoint(ENDPOINTS.CUSTOMER)
       .fetchAll()
@@ -76,6 +77,17 @@ export default function OrderForm(props) {
     }, 0);
     setValues({ ...values, gTotal: roundTo2DecimalPoint(gTotal) });
   }, [JSON.stringify(values.orderDetails)]);
+
+  useEffect (()=>{
+    if(orderId===0) resetFormControls();
+    else {
+      createAPIEndpoint(ENDPOINTS.ORDER).fetchById(orderId)
+      .then((res)=>{
+        console.log(res.data);
+      })
+      .catch(err=>console.log(err));
+    }
+  },[orderId])
 
   const validateForm = () => {
     let temp = {};
@@ -184,7 +196,7 @@ export default function OrderForm(props) {
         openPopup={orderHistoryVisibility}
         setOpenPopup={setOrderHistoryVisibility}
       >
-        <OrderHistory />
+        <OrderHistory {...{ setOrderId, setOrderHistoryVisibility }} />
       </Popup>
     </>
   );
