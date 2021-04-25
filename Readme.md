@@ -34,9 +34,9 @@ If you like or are using this project to learn or start your solution, please gi
  - Design a Form for Master (Order Summary).
  - Populate Customer DropDown with the Collection from the API.
  - Make HTTP Request to Web API from React JS & Enable CORS.
- - Add Component to list and search all food items.
- - Select Food Items to the Order.
- - Create Component to List Select Food Items and managing them.
+ - Add Component to list and search all Dessert items.
+ - Select Dessert Items to the Order.
+ - Create Component to List Select Dessert Items and managing them.
  - Calculate Order Grand Total.
  - Form Validation.
  - Create an Order or Submit an Order.
