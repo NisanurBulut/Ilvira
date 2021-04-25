@@ -7,6 +7,8 @@ It is a dessert ordering application.
 
 [It was inspired by the character Ilvira, who appeared in the animated movie Secret Magic Control Agency released on Netflix.](https://www.imdb.com/title/tt13932162/)
 
+![Ilvira](https://github.com/NisanurBulut/SayHiCode/blob/master/Trailers/Trailer_Ilvira.gif)
+
 ## Project Structure (src)
 |<b>Components</b>↓      |<b>Layouts</b>↓ |<b>Hooks</b>↓|<b>Utils</b>↓| <b>Controls</b>↓|
 |----------------------- |----------------|-------------|-------------|-----------------|
