@@ -37,7 +37,7 @@ namespace IlviraAPI.Controllers
                                       join detail in _context.Set<OrderDetail>()
                                       on master.OrderMasterId equals detail.OrderMasterId
                                       join dessertItem in _context.Set<DessertItem>()
-                                      on master.OrderMasterId equals dessertItem.DessertItemId
+                                      on detail.DessertItemPrice equals dessertItem.DessertItemId
                                       where master.OrderMasterId == id
                                       select new
                                       {
