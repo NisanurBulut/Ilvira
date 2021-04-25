@@ -11,6 +11,6 @@ namespace IlviraAPI.Models
         public DbSet<Customer> tCustomer { get; set; }
         public DbSet<DessertItem> tDessertItem { get; set; }
         public DbSet<OrderMaster> tOrderMaster { get; set; }
-        public DbSet<OrderMaster> tOrderDetail { get; set; }
+        public DbSet<OrderDetail> tOrderDetail { get; set; }
     }
 }

@@ -79,7 +79,15 @@ namespace IlviraAPI.Controllers
             }
 
             _context.Entry(orderMaster).State = EntityState.Modified;
-
+            // existing dessert items & newly added dessert items
+            foreach(OrderDetail item in orderMaster.OrderDetails)
+            {
+                if (item.OrderDetailId == 0)
+                    _context.tOrderDetail.Add(item);
+                else
+                    _context.Entry(item).State = EntityState.Modified;
+            }
+            foreach(var i in orderMaster.DeletedOrderItemIds)
             try
             {
                 await _context.SaveChangesAsync();
