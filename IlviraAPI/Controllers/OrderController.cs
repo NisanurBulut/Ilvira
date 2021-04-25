@@ -24,7 +24,8 @@ namespace IlviraAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderMaster>>> GettOrderMaster()
         {
-            return await _context.tOrderMaster.ToListAsync();
+            return await _context.tOrderMaster
+                .Include(x=>x.Customer).ToListAsync();
         }
 
         // GET: api/Order/5
