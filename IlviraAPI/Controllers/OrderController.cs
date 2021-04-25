@@ -25,21 +25,47 @@ namespace IlviraAPI.Controllers
         public async Task<ActionResult<IEnumerable<OrderMaster>>> GettOrderMaster()
         {
             return await _context.tOrderMaster
-                .Include(x=>x.Customer).ToListAsync();
+                .Include(x => x.Customer).ToListAsync();
         }
 
         // GET: api/Order/5
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderMaster>> GetOrderMaster(long id)
         {
-            var orderMaster = await _context.tOrderMaster.FindAsync(id);
-
+            // get dessert item from order details
+            var orderDetails = await (from master in _context.Set<OrderMaster>()
+                                      join detail in _context.Set<OrderDetail>()
+                                      on master.OrderMasterId equals detail.OrderMasterId
+                                      join dessertItem in _context.Set<DessertItem>()
+                                      on master.OrderMasterId equals dessertItem.DessertItemId
+                                      where master.OrderMasterId == id
+                                      select new
+                                      {
+                                          master.OrderMasterId,
+                                          detail.OrderDetailId,
+                                          detail.DessertItemId,
+                                          detail.DessertItemPrice,
+                                          detail.Quantity,
+                                          dessertItem.DessertName
+                                      }).ToListAsync();
+            var orderMaster = await (from o in _context.Set<OrderMaster>()
+                                     where o.OrderMasterId == id
+                                     select new
+                                     {
+                                         o.OrderMasterId,
+                                         o.OrderNumber,
+                                         o.CustomerId,
+                                         o.PaymentMethod,
+                                         o.GTotal,
+                                         deletedOrderItemIds = "",
+                                         orderDetails = orderDetails
+                                     }).FirstOrDefaultAsync();
             if (orderMaster == null)
             {
                 return NotFound();
             }
 
-            return orderMaster;
+            return Ok(orderMaster);
         }
 
         // PUT: api/Order/5
