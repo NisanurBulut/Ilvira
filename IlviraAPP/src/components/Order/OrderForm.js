@@ -7,6 +7,7 @@ import {
   Button as MuiButton,
 } from "@material-ui/core";
 import Form from "../../layouts/Form";
+import Popup from "../../layouts/Popup";
 import ReplayIcon from "@material-ui/icons/Replay";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import ReorderIcon from "@material-ui/icons/Reorder";
@@ -41,10 +42,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderForm(props) {
-  const { values, setValues, errors, setErrors, handleInputChange, resetFormControls } = props;
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleInputChange,
+    resetFormControls,
+  } = props;
   const classes = useStyles();
   const [customerList, setCustomerList] = useState([]);
-
+  const [orderHistoryVisibility, setOrderHistoryVisibility] = useState(false);
   useEffect(() => {
     createAPIEndpoint(ENDPOINTS.CUSTOMER)
       .fetchAll()
@@ -70,7 +78,7 @@ export default function OrderForm(props) {
     temp.customerId = values.customerId !== 0 ? "" : "This field is required";
     temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
     temp.orderDetails =
-      values.orderDetails.length  !== 0 ? "" : "This field is required";
+      values.orderDetails.length !== 0 ? "" : "This field is required";
     setErrors({ ...temp });
     return Object.values(temp).every((a) => a === "");
   };
@@ -159,6 +167,11 @@ export default function OrderForm(props) {
           </Grid>
         </Grid>
       </Form>
+      <Popup
+        title="History of Orders"
+        openPopup={orderHistoryVisibility}
+        setOpenPopup={setOrderHistoryVisibility}
+      ></Popup>
     </>
   );
 }
