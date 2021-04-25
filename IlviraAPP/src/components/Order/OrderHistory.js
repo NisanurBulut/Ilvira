@@ -6,7 +6,12 @@ import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
 export default function OrderHistory(props) {
-  const { setOrderId, setOrderHistoryVisibility } = props;
+  const {
+    setOrderId,
+    setOrderHistoryVisibility,
+    resetFormControls,
+    setNotify,
+  } = props;
   const [orderHistory, setOrderHistory] = useState([]);
 
   useEffect(() => {
@@ -22,7 +27,21 @@ export default function OrderHistory(props) {
     setOrderId(id);
     setOrderHistoryVisibility(false);
   };
-  const deleteOrder = (id) => {};
+  const deleteOrder = (id) => {
+    if (window.confirm("are you sure to delete this order record?")) {
+      createAPIEndpoint(ENDPOINTS.ORDER)
+        .delete(id)
+        .then((res) => {
+          showForUpdate(0);
+          resetFormControls();
+          setNotify({
+            isOpen: true,
+            message: "Order record is deleted successfullt",
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   return (
     <Table>
       <TableHead>

@@ -119,7 +119,6 @@ export default function OrderForm(props) {
       .then((res) => {
         setOrderId(0);
         setNotify({isOpen:true, message:"Current order is updated successfully"});
-
       })
       .catch((err) => console.log(err));
   };
@@ -203,7 +202,7 @@ export default function OrderForm(props) {
                 type="submit"
                 endIcon={<RestaurantMenuIcon />}
               >
-                Submit
+                Save
               </MuiButton>
               <MuiButton
                 onClick={resetForm}
@@ -230,7 +229,7 @@ export default function OrderForm(props) {
         openPopup={orderHistoryVisibility}
         setOpenPopup={setOrderHistoryVisibility}
       >
-        <OrderHistory {...{ setOrderId, setOrderHistoryVisibility }} />
+        <OrderHistory {...{ setOrderId, setOrderHistoryVisibility, resetFormControls, setNotify }} />
       </Popup>
       <Notification {...{notify, setNotify}} />
     </>
