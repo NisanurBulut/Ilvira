@@ -1,10 +1,9 @@
 ## Give a Star! :star:
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
-### ILVIRA: It is a dessert ordering application.
+### ILVIRA
 <img src="https://github.com/NisanurBulut/Ilvira/blob/master/Trailers/ilvira.jpg">
-
-[It was inspired by the character Ilvira, who appeared in the animated movie Secret Magic Control Agency released on Netflix.](https://www.imdb.com/title/tt13932162/)
+It is a dessert ordering application. [It was inspired by the character Ilvira, who appeared in the animated movie Secret Magic Control Agency released on Netflix.](https://www.imdb.com/title/tt13932162/)
 
 ## Project Structure (src)
 |<b>Components</b>↓      |<b>Layouts</b>↓ |<b>Hooks</b>↓|<b>Utils</b>↓| <b>Controls</b>↓|
