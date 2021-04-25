@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submitButtonGroup: {
-    backgroundColor: "#DD3AA0",
+    backgroundColor: "#e361b3",
     color: "#fff",
     margin: theme.spacing(1),
     "& .MuiButtonBase-root ": {
@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
       textTransform: "none",
       color: "#fff",
     },
-    "& .hover": {
-      backgroundColor: "#c68fb1",
+    "&:hover": {
+      backgroundColor: "#dd3aa0",
     },
   },
 }));
