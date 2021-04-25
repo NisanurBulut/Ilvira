@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#DD3AA0",
     color: "#fff",
     margin: theme.spacing(1),
+    "& .MuiButtonBase-root ": {
+      border: "none"
+    },
     "& .MuiButton-label": {
       textTransform: "none",
       color: "#fff",
