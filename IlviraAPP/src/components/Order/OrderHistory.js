@@ -58,7 +58,7 @@ export default function OrderHistory(props) {
           <TableRow key={item.orderMasterId}>
             <TableCell>{item.orderNumber}</TableCell>
             <TableCell>{item.customer.customerName}</TableCell>
-            <TableCell>{item.pMethod}</TableCell>
+            <TableCell>{item.paymentMethod}</TableCell>
             <TableCell>{item.gTotal + " ₺"}</TableCell>
             <TableCell>
               <DeleteTwoToneIcon

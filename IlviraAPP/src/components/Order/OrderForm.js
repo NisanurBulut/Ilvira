@@ -17,7 +17,7 @@ import { roundTo2DecimalPoint } from "../../utils";
 import OrderHistory from "./OrderHistory";
 import Notification from "../../layouts/Notification";
 
-const pMethods = [
+const paymentMethods = [
   { id: "Cash", title: "Cash" },
   { id: "Card", title: "Card" },
 ];
@@ -97,7 +97,7 @@ export default function OrderForm(props) {
   const validateForm = () => {
     let temp = {};
     temp.customerId = values.customerId !== 0 ? "" : "This field is required";
-    temp.pMethod = values.pMethod !== "none" ? "" : "This field is required.";
+    temp.paymentMethod = values.paymentMethod !== "none" ? "" : "This field is required.";
     temp.orderDetails =
       values.orderDetails.length !== 0 ? "" : "This field is required";
     setErrors({ ...temp });
@@ -173,11 +173,11 @@ export default function OrderForm(props) {
           <Grid item xs={6}>
             <Select
               label="Payment Method"
-              name="pMethod"
-              value={values.pMethod}
-              options={pMethods}
+              name="paymentMethod"
+              value={values.paymentMethod}
+              options={paymentMethods}
               onChange={handleInputChange}
-              error={errors.pMethod}
+              error={errors.paymentMethod}
             />
             <Input
               disabled
