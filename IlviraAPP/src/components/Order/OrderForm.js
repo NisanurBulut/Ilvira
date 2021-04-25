@@ -10,7 +10,7 @@ import Form from "../../layouts/Form";
 import Popup from "../../layouts/Popup";
 import ReplayIcon from "@material-ui/icons/Replay";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
-import ReorderIcon from "@material-ui/icons/Reorder";
+import VisibilityTwoToneIcon from '@material-ui/icons/VisibilityTwoTone';
 import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
@@ -171,7 +171,7 @@ export default function OrderForm(props) {
               <MuiButton
                 size="small"
                 onClick={openHistoryOfOrders}
-                startIcon={<ReorderIcon />}
+                endIcon={<VisibilityTwoToneIcon />}
               >
                 Orders
               </MuiButton>

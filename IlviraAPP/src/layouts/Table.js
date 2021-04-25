@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
       fontWeight: "300",
     },
     "& tbody tr:hover": {
-      backgroundColor: "#fffbf2",
+      backgroundColor: "#fbebf5",
       cursor: "pointer",
     },
     "& .MuiTableCell-root": {
@@ -16,6 +16,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Table() {
-  return <div></div>;
+export default function Table(props) {
+  const classes = useStyles();
+  return <MuiTable className={classes.table}>
+    {props.children}
+  </MuiTable>;
 }
