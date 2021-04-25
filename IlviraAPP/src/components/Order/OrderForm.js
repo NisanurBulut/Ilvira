@@ -83,7 +83,8 @@ export default function OrderForm(props) {
     else {
       createAPIEndpoint(ENDPOINTS.ORDER).fetchById(orderId)
       .then((res)=>{
-        console.log(res.data);
+        setValues(res.data);
+        setErrors({});
       })
       .catch(err=>console.log(err));
     }
