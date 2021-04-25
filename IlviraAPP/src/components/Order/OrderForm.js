@@ -209,7 +209,7 @@ export default function OrderForm(props) {
         </Grid>
       </Form>
       <Popup
-        title="History of Orders"
+        title={<><RestaurantMenuIcon />   History of Orders</> }
         openPopup={orderHistoryVisibility}
         setOpenPopup={setOrderHistoryVisibility}
       >
