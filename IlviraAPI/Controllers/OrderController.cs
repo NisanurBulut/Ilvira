@@ -79,6 +79,7 @@ namespace IlviraAPI.Controllers
             }
 
             _context.Entry(orderMaster).State = EntityState.Modified;
+
             // existing dessert items & newly added dessert items
             foreach (OrderDetail item in orderMaster.OrderDetails)
             {

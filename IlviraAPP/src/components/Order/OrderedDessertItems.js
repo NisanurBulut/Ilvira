@@ -140,7 +140,7 @@ export default function OrderedDessertItems(props) {
               <ListItemSecondaryAction className={classes.deleteButton}>
                 <IconButton
                   disableRipple
-                  onClick={(e) => removeDessertItem(index, item.orderDetailsId)}
+                  onClick={(e) => removeDessertItem(index, item.orderDetailId)}
                 >
                   <DeleteTwoToneIcon />
                 </IconButton>
