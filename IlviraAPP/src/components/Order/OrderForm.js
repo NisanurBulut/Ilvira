@@ -15,6 +15,8 @@ import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
 import OrderHistory from "./OrderHistory";
+import Notification from "../../layouts/Notification";
+
 const pMethods = [
   { id: "Cash", title: "Cash" },
   { id: "Card", title: "Card" },
@@ -58,6 +60,7 @@ export default function OrderForm(props) {
   const [customerList, setCustomerList] = useState([]);
   const [orderHistoryVisibility, setOrderHistoryVisibility] = useState(false);
   const [orderId, setOrderId] = useState(0);
+  const [notify, setNotify] = useState({ isOpen: false });
   useEffect(() => {
     createAPIEndpoint(ENDPOINTS.CUSTOMER)
       .fetchAll()
@@ -106,6 +109,7 @@ export default function OrderForm(props) {
       .create(values)
       .then((res) => {
         resetFormControls();
+        setNotify({isOpen:true, message:"New order is created successfully"});
       })
       .catch((err) => console.log(err));
   };
@@ -114,6 +118,8 @@ export default function OrderForm(props) {
       .update(id, values)
       .then((res) => {
         setOrderId(0);
+        setNotify({isOpen:true, message:"Current order is updated successfully"});
+
       })
       .catch((err) => console.log(err));
   };
@@ -127,10 +133,10 @@ export default function OrderForm(props) {
       }
     }
   };
-  const resetForm = ()=>{
+  const resetForm = () => {
     resetFormControls();
     setOrderId(0);
-  }
+  };
   const openHistoryOfOrders = (e) => {
     setOrderHistoryVisibility(true);
   };
@@ -199,7 +205,11 @@ export default function OrderForm(props) {
               >
                 Submit
               </MuiButton>
-              <MuiButton onClick={resetForm} size="small" startIcon={<ReplayIcon />}></MuiButton>
+              <MuiButton
+                onClick={resetForm}
+                size="small"
+                startIcon={<ReplayIcon />}
+              ></MuiButton>
               <MuiButton
                 size="small"
                 onClick={openHistoryOfOrders}
@@ -212,12 +222,17 @@ export default function OrderForm(props) {
         </Grid>
       </Form>
       <Popup
-        title={<><RestaurantMenuIcon />   History of Orders</> }
+        title={
+          <>
+            <RestaurantMenuIcon /> History of Orders
+          </>
+        }
         openPopup={orderHistoryVisibility}
         setOpenPopup={setOrderHistoryVisibility}
       >
         <OrderHistory {...{ setOrderId, setOrderHistoryVisibility }} />
       </Popup>
+      <Notification {...{notify, setNotify}} />
     </>
   );
 }
