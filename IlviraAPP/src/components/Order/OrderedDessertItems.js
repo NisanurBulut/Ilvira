@@ -73,6 +73,8 @@ export default function OrderedDessertItems(props) {
   const removeDessertItem = (index, id) => {
     let dItem = { ...values };
     dItem.orderDetails = dItem.orderDetails.filter((_, i) => i !== index);
+    if (id !== 0)
+      dItem.deleteOrderItemIds = dItem.deleteOrderItemIds + id + ",";
     setValues({ ...dItem });
   };
 
