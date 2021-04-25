@@ -14,6 +14,7 @@ import ReorderIcon from "@material-ui/icons/Reorder";
 import { Input, Select } from "../../controls";
 import { createAPIEndpoint, ENDPOINTS } from "../../api";
 import { roundTo2DecimalPoint } from "../../utils";
+import OrderHistory from "./OrderHistory";
 const pMethods = [
   { id: "Cash", title: "Cash" },
   { id: "Card", title: "Card" },
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     margin: theme.spacing(1),
     "& .MuiButtonBase-root ": {
-      border: "none"
+      border: "none",
     },
     "& .MuiButton-label": {
       textTransform: "none",
@@ -79,7 +80,7 @@ export default function OrderForm(props) {
   const validateForm = () => {
     let temp = {};
     temp.customerId = values.customerId !== 0 ? "" : "This field is required";
-    temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
+    temp.pMethod = values.pMethod !== "none" ? "" : "This field is required.";
     temp.orderDetails =
       values.orderDetails.length !== 0 ? "" : "This field is required";
     setErrors({ ...temp });
@@ -96,6 +97,10 @@ export default function OrderForm(props) {
         })
         .catch((err) => console.log(err));
     }
+  };
+
+  const openHistoryOfOrders = (e) => {
+    setOrderHistoryVisibility(true);
   };
 
   return (
@@ -163,7 +168,11 @@ export default function OrderForm(props) {
                 Submit
               </MuiButton>
               <MuiButton size="small" startIcon={<ReplayIcon />}></MuiButton>
-              <MuiButton size="small" startIcon={<ReorderIcon />}>
+              <MuiButton
+                size="small"
+                onClick={openHistoryOfOrders}
+                startIcon={<ReorderIcon />}
+              >
                 Orders
               </MuiButton>
             </ButtonGroup>
@@ -174,7 +183,9 @@ export default function OrderForm(props) {
         title="History of Orders"
         openPopup={orderHistoryVisibility}
         setOpenPopup={setOrderHistoryVisibility}
-      ></Popup>
+      >
+        <OrderHistory />
+      </Popup>
     </>
   );
 }
