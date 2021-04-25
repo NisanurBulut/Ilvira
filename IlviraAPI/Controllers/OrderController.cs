@@ -46,7 +46,7 @@ namespace IlviraAPI.Controllers
                                           detail.DessertItemId,
                                           detail.DessertItemPrice,
                                           detail.Quantity,
-                                          dessertItem.DessertName
+                                          dessertItemName=dessertItem.DessertName
                                       }).ToListAsync();
             var orderMaster = await (from o in _context.Set<OrderMaster>()
                                      where o.OrderMasterId == id
