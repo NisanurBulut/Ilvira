@@ -78,17 +78,18 @@ export default function OrderForm(props) {
     setValues({ ...values, gTotal: roundTo2DecimalPoint(gTotal) });
   }, [JSON.stringify(values.orderDetails)]);
 
-  useEffect (()=>{
-    if(orderId===0) resetFormControls();
+  useEffect(() => {
+    if (orderId === 0) resetFormControls();
     else {
-      createAPIEndpoint(ENDPOINTS.ORDER).fetchById(orderId)
-      .then((res)=>{
-        setValues(res.data);
-        setErrors({});
-      })
-      .catch(err=>console.log(err));
+      createAPIEndpoint(ENDPOINTS.ORDER)
+        .fetchById(orderId)
+        .then((res) => {
+          setValues(res.data);
+          setErrors({});
+        })
+        .catch((err) => console.log(err));
     }
-  },[orderId])
+  }, [orderId]);
 
   const validateForm = () => {
     let temp = {};
@@ -100,15 +101,30 @@ export default function OrderForm(props) {
     return Object.values(temp).every((a) => a === "");
   };
 
+  const createOrder = () => {
+    createAPIEndpoint(ENDPOINTS.ORDER)
+      .create(values)
+      .then((res) => {
+        resetFormControls();
+      })
+      .catch((err) => console.log(err));
+  };
+  const updateOrder = (id) => {
+    createAPIEndpoint(ENDPOINTS.ORDER)
+      .update(id, values)
+      .then((res) => {
+        setOrderId(0);
+      })
+      .catch((err) => console.log(err));
+  };
   const submitOrder = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      createAPIEndpoint(ENDPOINTS.ORDER)
-        .create(values)
-        .then((res) => {
-          resetFormControls();
-        })
-        .catch((err) => console.log(err));
+      if (values.orderMasterId === 0) {
+        createOrder();
+      } else {
+        updateOrder(values.orderMasterId);
+      }
     }
   };
 
